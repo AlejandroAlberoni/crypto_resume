@@ -18,6 +18,10 @@ import SearchTrigger from "./searchtrigger";
 import { Search, LoaderCircle } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { poppins } from "@/fonts";
 
 const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
@@ -49,9 +53,9 @@ const SearchInput = () => {
       <DialogTrigger>
         <SearchTrigger />
       </DialogTrigger>
-        <DialogContent className="dark:bg-zinc-800">
+      <DialogContent className="dark:bg-zinc-800">
         <DialogHeader className="flex">
-          <DialogTitle className="flex items-center">
+          <DialogTitle className="relative flex items-center">
             <Search className="absolute pl-2 text-gray-300" />
             <input
               placeholder="Search coin"
@@ -66,14 +70,26 @@ const SearchInput = () => {
             </div>
           </DialogTitle>
         </DialogHeader>
-        <ScrollArea>
-          <h3 className="font-sans font-bold">Coins</h3>
-          <Separator className="my-2"/>
+        <ScrollArea className="dark:decoration-white dark:text-white">
+          {data?.coins != undefined ? (
+            <div>
+              <h3 className="font-sans font-bold">Coins</h3>
+              <Separator className="my-2" />
+            </div>
+          ) : (
+            <div className="text-center font-bold font-mono my-10">
+              No coin was found.
+            </div>
+          )}
           <div className="grid space-y-1 mt-2 max-h-[80vh]">
+
+            {isFetching &&
+              [...Array(7)].map((_, index) => <ResultsSkeleton key={index} />)}
+
             {data?.coins.map((coin: Coin) => (
-              <div
+              <button
                 key={coin.id}
-                className="flex space-x-3 items-center hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-sm py-2"
+                className="flex space-x-3 items-center hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-sm py-2 group hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               >
                 <Image
                   src={coin.thumb}
@@ -82,11 +98,21 @@ const SearchInput = () => {
                   height={15}
                   className="ml-8"
                 />
-                <div className="flex space-x-1 font-sans">
-                  <div className="font-semibold text-xs">{coin.name}</div>
-                  <div className="italic text-xs">{coin.symbol}</div>
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex space-x-1 font-sans">
+                    <div className="font-semibold text-xs">{coin.name}</div>
+                    <div className="italic text-xs">{coin.symbol}</div>
+                  </div>
+                  <div className="ml-auto pr-10">
+                    <Badge className="bg-zinc-300 group-hover:bg-zinc-500 dark:bg-zinc-600 dark:group-hover:bg-zinc-500 dark:text-white font-sans">
+                      Rank:{" "}
+                      <p className={`${poppins.className} pl-2`}>
+                        {coin?.market_cap_rank ? coin.market_cap_rank : "-"}
+                      </p>
+                    </Badge>
+                  </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </ScrollArea>
@@ -98,3 +124,14 @@ const SearchInput = () => {
 };
 
 export default SearchInput;
+
+function ResultsSkeleton() {
+  return (
+    <div className="flex space-x-2 items-center rounded py-1 border border-zinc-600">
+      <Skeleton className="ml-2 rounded-full h-6 w-6 bg-zinc-300" />
+      <Skeleton className="rounded-lg w-20 h-5 bg-zinc-300" />
+      <Skeleton className="float-end rounded-lg w-10 h-5 bg-zinc-300" />
+      <Skeleton className="absolute right-10 rounded-lg w-16 h-5 bg-zinc-300" />
+    </div>
+  );
+}
