@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Settings, CircleUserRound, Divide } from "lucide-react";
+import { Settings, CircleUserRound, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -17,8 +17,8 @@ const SettingsMenu = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline">
-          <Settings className="scale-125" />
+        <Button variant="outline" className="dark:bg-zinc-800 hover:dark:bg-zinc-700">
+          <Settings className="scale-[140%]" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-min mx-3 grid dark:bg-zinc-800">
@@ -35,6 +35,7 @@ const SettingsMenu = () => {
           />
           <p>Theme</p>
         </div>
+        <div className="flex space-x-2 space-y-2 items-center"><LogOut /><p>Logout</p></div>
       </PopoverContent>
     </Popover>
   );

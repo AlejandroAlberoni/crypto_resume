@@ -4,8 +4,8 @@ import { Plus, Command, Search } from "lucide-react";
 const SearchTrigger = () => {
   return (
     <Button variant={"outline"} asChild>
-      <div className="flex space-between space-x-20 items-center pr-10 md:pr-3">
-        <div className="flex items-center space-x-2">
+      <div className="flex space-between md:space-x-20 items-center md:pr-3 dark:bg-zinc-800 hover:dark:bg-zinc-700">
+        <div className="flex items-center space-x-2 cursor-text">
           <Search />
           <p className="font-sans font-light">Search</p>
         </div>
