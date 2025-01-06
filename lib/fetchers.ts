@@ -23,4 +23,9 @@ async function getCoinMarketDataById(id:string = 'bitcoin ', vs_currency: string
   
 }
 
-export { getCoins, getCoinDataById, getCoinMarketDataById };
+async function getCurrencies() {
+  const response = await api.get(`/coingecko/currencies`);
+  return response.data;
+}
+
+export { getCoins, getCoinDataById, getCoinMarketDataById, getCurrencies };

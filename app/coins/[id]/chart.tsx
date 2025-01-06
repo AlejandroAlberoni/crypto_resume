@@ -3,27 +3,15 @@ import React from "react";
 import { LoaderCircle } from "lucide-react";
 
 import {
-  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
 } from "@/components/ui/chart";
 
 import { CoinMarketData } from "@/lib/schemas";
 import { getCoinMarketDataById } from "@/lib/fetchers";
 import { useQuery } from "@tanstack/react-query";
-import {
-  LineChart,
-  Line,
-  YAxis,
-  XAxis,
-  CartesianGrid,
-  Tooltip,
-  Curve,
-} from "recharts";
-import { montserrat, inter } from "@/lib/fonts";
+import { LineChart, Line, YAxis, XAxis, CartesianGrid } from "recharts";
 
 function Chart({
   coinId,
@@ -108,4 +96,3 @@ function Chart({
 }
 
 export default Chart;
-

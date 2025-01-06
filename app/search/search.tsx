@@ -6,9 +6,7 @@ import { SearchCoins, Coin } from "@/lib/schemas";
 import { getCoins } from "@/lib/fetchers";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -21,7 +19,6 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { poppins } from "@/fonts";
 import Link from "next/link";
 
 const SearchInput = () => {
@@ -110,7 +107,7 @@ function SearchResults({
 }: {
   data: SearchCoins | undefined;
   isFetching: boolean;
-  setIsDialogOpen: Function;
+  setIsDialogOpen: (arg: boolean) => void;
 }) {
   return (
     <ScrollArea className="dark:decoration-white dark:text-white">
@@ -169,10 +166,10 @@ function SearchResults({
 function ResultsSkeleton() {
   return (
     <Skeleton className="flex space-x-2 items-center rounded py-1 dark:bg-zinc-700">
-      <Skeleton className="ml-2 rounded-full h-6 w-6 bg-zinc-300" />
-      <Skeleton className="rounded-lg w-20 h-5 bg-zinc-300" />
-      <Skeleton className="float-end rounded-lg w-10 h-5 bg-zinc-300" />
-      <Skeleton className="absolute right-10 rounded-lg w-16 h-5 bg-zinc-300" />
+      <Skeleton className="ml-2 rounded-full h-6 w-6 bg-zinc-300 dark:bg-zinc-500" />
+      <Skeleton className="rounded-lg w-20 h-5 bg-zinc-300 dark:bg-zinc-500" />
+      <Skeleton className="float-end rounded-lg w-10 h-5 bg-zinc-300 dark:bg-zinc-500" />
+      <Skeleton className="absolute right-10 rounded-lg w-16 h-5 bg-zinc-300 dark:bg-zinc-500" />
     </Skeleton>
   );
 }

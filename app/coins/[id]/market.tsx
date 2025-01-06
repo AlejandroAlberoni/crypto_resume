@@ -5,7 +5,6 @@ export default function MarketInfo({
     data,
     vs_currency,
     days,
-    title,
   }: {
     data: CoinMarketData;
     vs_currency: string;
@@ -16,7 +15,7 @@ export default function MarketInfo({
     const actual_market_cap = data?.market_caps[data.market_caps.length - 1]?.[1];
     const initial_price = data?.prices[0][1];
     const final_price = data?.prices[data.prices.length - 1][1];
-    let time_variation_prices = ((final_price - initial_price)*100) / initial_price
+    const time_variation_prices = ((final_price - initial_price)*100) / initial_price
     return (
       <div className="flex flex-wrap justify-center space-x-4">
         <MarketInfoLayout

@@ -26,8 +26,13 @@ const About = ({ data }: { data: CoinDataById }) => {
         <AccordionItem value="link">
           <AccordionTrigger>Homepage</AccordionTrigger>
           <AccordionContent className="flex flex-col space-y-2">
-            {data.links?.homepage.map((link) => (
-              <a href={link} target="_blank" className="pl-6 text-blue-500 hover:underline">
+            {data.links?.homepage.map((link, index) => (
+              <a
+                key={index}
+                href={link}
+                target="_blank"
+                className="pl-6 text-blue-500 hover:underline"
+              >
                 {link}
               </a>
             ))}
